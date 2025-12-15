@@ -1,0 +1,51 @@
+schema: '2.0'
+stages:
+  fetch_patric:
+    cmd: python scripts/fetch_patric.py --output data/raw/patric
+    deps:
+    - path: scripts/fetch_patric.py
+      hash: md5
+      md5: 7323a9665e3ff978088e99492f2ff41b
+      size: 348
+    outs:
+    - path: data/raw/patric
+      hash: md5
+      md5: 58e0105d3c4c589e2c4f8de3f97e615b.dir
+      size: 24
+      nfiles: 1
+  fetch_sarscov2:
+    cmd: python scripts/fetch_sarscov2.py --output data/raw/sarscov2
+    deps:
+    - path: scripts/fetch_sarscov2.py
+      hash: md5
+      md5: 15562059a8de7f03a8c77b7544e7f10c
+      size: 366
+    outs:
+    - path: data/raw/sarscov2
+      hash: md5
+      md5: 6be3443830786b373ac8d3160ff75163.dir
+      size: 28
+      nfiles: 1
+  preprocess:
+    cmd: python scripts/preprocess.py --patric data/raw/patric --sarscov2 
+      data/raw/sarscov2 --output data/processed/combined.csv
+    deps:
+    - path: data/raw/patric
+      hash: md5
+      md5: 58e0105d3c4c589e2c4f8de3f97e615b.dir
+      size: 24
+      nfiles: 1
+    - path: data/raw/sarscov2
+      hash: md5
+      md5: 6be3443830786b373ac8d3160ff75163.dir
+      size: 28
+      nfiles: 1
+    - path: scripts/preprocess.py
+      hash: md5
+      md5: 0ad6e679555868922f9205fff503ed4c
+      size: 582
+    outs:
+    - path: data/processed/combined.csv
+      hash: md5
+      md5: 7ed84a27f7b2d6e3dc7ba110cee759a5
+      size: 97
