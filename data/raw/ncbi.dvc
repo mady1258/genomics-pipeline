@@ -1,0 +1,6 @@
+outs:
+- md5: 0a8ac6773902620de9adc30d9be12d5b.dir
+  size: 303377657247
+  nfiles: 4
+  hash: md5
+  path: ncbi
