@@ -1,0 +1,24 @@
+stages:
+  fetch_patric:
+    cmd: python scripts/fetch_patric.py --output data/raw/patric
+    deps:
+    - scripts/fetch_patric.py
+    outs:
+    - data/raw/patric
+
+  fetch_sarscov2:
+    cmd: python scripts/fetch_sarscov2.py --output data/raw/sarscov2
+    deps:
+    - scripts/fetch_sarscov2.py
+    outs:
+    - data/raw/sarscov2
+
+  preprocess:
+    cmd: python scripts/preprocess.py --patric data/raw/patric --sarscov2 
+      data/raw/sarscov2 --output data/processed/combined.csv
+    deps:
+    - data/raw/patric
+    - data/raw/sarscov2
+    - scripts/preprocess.py
+    outs:
+    - data/processed/combined.csv
